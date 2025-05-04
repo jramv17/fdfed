@@ -1,12 +1,18 @@
 const request = require('supertest');
 const app = require('../app');
 
+function generateRandomString(length = 8) {
+  return Math.random().toString(36).substring(2, 2 + length);
+}
+
 async function getJwtCookie() {
+  const random = generateRandomString();
+
   const res = await request(app)
     .post('/user/register')
     .send({
-      username: 'testuser',
-      email: 'test@example.com',
+      username: `testuser_${random}`,
+      email: `test_${random}@example.com`,
       password: 'securepass'
     });
 
