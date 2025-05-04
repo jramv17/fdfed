@@ -1,4 +1,4 @@
-import { createLogger, format, transports } from "winston";
+const { createLogger, format, transports } = require("winston");
 const { combine, timestamp, json, colorize } = format;
 
 // Custom format for console logging with colors
@@ -21,4 +21,5 @@ const logger = createLogger({
   ],
 });
 
-export default logger;
+module.exports = logger;
+

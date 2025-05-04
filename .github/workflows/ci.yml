@@ -3,7 +3,7 @@ name: CI/CD Pipeline for Vercel
 on:
   push:
     branches:
-      - '**'  # Run on all branches
+      - "**" # Run on all branches
 
 jobs:
   # STAGE 1: TESTING
@@ -19,11 +19,45 @@ jobs:
         with:
           node-version: 18
 
+      - name: 💾 Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: 📦 Install Dependencies
         run: npm ci
 
       - name: 🧪 Run Tests
         run: npm test
+
+  lint:
+    name: 🧹 Run Lint Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v3
+
+      - name: 🧰 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 💾 Restore node_modules from cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🧪 Run Lint
+        run: npm run lint
 
   # STAGE 2: DEPLOYMENT (only on 'prod' branch)
   deploy:
