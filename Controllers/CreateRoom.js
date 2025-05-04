@@ -69,8 +69,13 @@ class RoomModel {
         if (!email || !apartment_id) {
             return res.status(400).json({ message: "Email and apartment_id are required." });
         }
+        const room= await dbModel.findOne( {apartment_id:apartment_id});
+            if(!room){
+                return res.status(400).json({ message: "Apartment not found or no changes made" });
+            }
 
         try {
+            
             const updatedRoom = await dbModel.updateOne(
                 { apartment_id },
                 { $set: { emergency_email: email } }

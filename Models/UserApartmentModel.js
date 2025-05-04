@@ -5,7 +5,6 @@ const UserApartmentSchema = new mongoose.Schema(
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            type: true,
             required: true,
         },
         apartments: [
