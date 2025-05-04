@@ -1,8 +1,7 @@
 const request = require('supertest');
-const app = require('../index.js');
+const app = require('../app.js');
 const mongoose = require('mongoose');
 const User = require('../Models/UserModel.js');
-// const env_variables=require('../utils/envutils.js');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
 //make a local instance of db
@@ -15,6 +14,7 @@ beforeAll(async () => {
         useUnifiedTopology: true,
     });
 });
+
 
 
 //clean the db before each test
@@ -67,6 +67,8 @@ describe('User Authentication Routes', () => {
       expect(res.statusCode).toBe(400);
       expect(res.body.message).toMatch('Username or email already in use');
     });
+
+    
   
     test('GET /user/logout - should clear cookie and return success message', async () => {
       const res = await request(app)

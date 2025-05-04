@@ -64,7 +64,9 @@ class App extends Iointialize {
                             status: message.split(" ")[2],
                             responseTime: message.split(" ")[3],
                         };
-                        logger.default.info(JSON.stringify(logObject));
+                        // logger.default.info(JSON.stringify(logObject));
+                        logger.info(JSON.stringify(logObject));
+
                     },
                 },
             }),
