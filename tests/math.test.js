@@ -1,5 +1,5 @@
 const { add } = require('../utils/testutils');
-test('adds 2 + 3 to equal 5', () => {
+test('test init check', () => {
   expect(add(2, 3)).toBe(5);
 });
 
