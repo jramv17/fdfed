@@ -4,6 +4,7 @@ const ApartmentUserSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        index:true,
         required: true
     },
     username: { type: String, required: true },
