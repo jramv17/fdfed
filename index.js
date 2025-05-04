@@ -23,11 +23,13 @@ const Admin = require("./Routes/AdminRouter");
 const Payment = require("./Routes/PaymentRouter");
 const PostRouter = require("./Routes/PostRouter");
 const path = require("path");
+const { config } = require("dotenv");
 class App extends Iointialize {
     constructor() {
+        config();
         super();
         this.cors = {
-            origin: "http://localhost:5173",
+            origin: process.env.CLIENT_URL,
             methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             allowedHeaders: ["Content-Type", "Authorization"],
             credentials: true,
