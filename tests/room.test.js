@@ -75,7 +75,7 @@ describe('User Room Routes', () => {
     test('POST /createRoom - should fail for duplicate registration number', async () => {
         const payload = {
             name: 'Another Apartment',
-            registration_num: '123456', // already used
+            registration_num: '123456', 
             state: 'OtherState',
             address: '456 Other Street',
             flat_id: 'B2',
