@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  societylog-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MONGO_URI: ${MONGO_URI}
+        JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+        NODE_ENV: ${NODE_ENV}
+        GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+        GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+        PORT: ${PORT}
+        CRYPTO_SECRET_KEY: ${CRYPTO_SECRET_KEY}
+        RAZORPAY_KEY_ID: ${RAZORPAY_KEY_ID}
+        RAZORPAY_SECRET_KEY: ${RAZORPAY_SECRET_KEY}
+        SERVER_URL: ${SERVER_URL}
+        CLIENT_URL: ${CLIENT_URL}
+        FALLBACK_URL: ${FALLBACK_URL}
+        REDIS_HOST: ${REDIS_HOST}
+        REDIS_PORT: ${REDIS_PORT}
+        REDIS_PASSWORD: ${REDIS_PASSWORD}
+        ADMIN_EMAIL: ${ADMIN_EMAIL}
+        RESEND_API: ${RESEND_API}
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
+

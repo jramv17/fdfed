@@ -1,0 +1,49 @@
+FROM node:20-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy source code
+COPY . .
+
+ARG MONGO_URI
+ARG JWT_SECRET_KEY
+ARG NODE_ENV
+ARG GOOGLE_CLIENT_ID
+ARG GOOGLE_CLIENT_SECRET
+ARG PORT
+ARG CRYPTO_SECRET_KEY
+ARG CLIENT_URL
+ARG FALLBACK_URL
+ARG REDIS_HOST
+ARG REDIS_PORT
+ARG REDIS_PASSWORD
+ARG ADMIN_EMAIL
+ARG RESEND_API
+
+# Set ENV variables (available at runtime)
+ENV MONGO_URI=$MONGO_URI \
+    JWT_SECRET_KEY=$JWT_SECRET_KEY \
+    NODE_ENV=$NODE_ENV \
+    GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID \
+    GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET \
+    PORT=$PORT \
+    CRYPTO_SECRET_KEY=$CRYPTO_SECRET_KEY \
+    CLIENT_URL=$CLIENT_URL \
+    FALLBACK_URL=$FALLBACK_URL \
+    REDIS_HOST=$REDIS_HOST \
+    REDIS_PORT=$REDIS_PORT \
+    REDIS_PASSWORD=$REDIS_PASSWORD \
+    ADMIN_EMAIL=$ADMIN_EMAIL \
+    RESEND_API=$RESEND_API
+
+# Expose the port
+EXPOSE $PORT
+
+# Start the app (make sure "container" script exists in package.json)
+CMD ["npm", "run", "server"]
+
