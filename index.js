@@ -88,7 +88,7 @@ class App extends Iointialize {
         this.app.use("/user", Auth);
         this.app.use("/auth/google", GoogleStrategy);
         this.app.use("/jwtVerify", JwtVerifyRouter);
-        this.app.use("/createRoom", CreateRoom);
+        this.app.use("/createRoom", Create myRoom);
         this.app.use("/my-rooms", Rooms);
         this.app.use("/join-room", JoinRoom);
         this.app.use("/room-details", RoomDetails);

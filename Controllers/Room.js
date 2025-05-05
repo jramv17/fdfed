@@ -15,7 +15,7 @@ class RoomController {
             return res.status(200).json({ message: "User not found" });
         }
         if (userRooms.apartments?.length == 0) {
-            return res.status(200).json({ message: "No apartments found" });
+            return res.status(200).json({ message: "No apartments found" }); 
         }
         const Rooms = await Promise.all(
             userRooms.apartments.map(async (id) => {
