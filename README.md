@@ -25,7 +25,7 @@ This project is a full-stack application built using **React** for the front-end
 
 Make sure you have the following installed on your machine:
 
-- [Node.js](https://nodejs.org/) (v14 or higher)
+- [Node.js](https://nodejs.org/) (v20 or higher)
 - npm (comes with Node.js)
 
 ## Getting Started
