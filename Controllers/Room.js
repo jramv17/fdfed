@@ -1,7 +1,15 @@
 const ApartmentData = require("../Models/UserApartmentModel");
 const RoomModel = require("../Models/RoomModel");
+const redisClient = require("../config/redisClient");
 class RoomController {
     async userRooms(req, res) {
+        const cachedKey= `userRooms:${req.id}`;
+        const cachedData=await redisClient.get(cachedKey);
+        if(cachedData){
+            return res.status(200).json({details: JSON.parse(cachedData)});
+        }
+
+
         const userRooms = await ApartmentData.findOne({ user: req.id });
         if (!userRooms) {
             return res.status(200).json({ message: "User not found" });
@@ -22,6 +30,8 @@ class RoomController {
                 };
             })
         );
+        //caching for 10 minutes
+        await redisClient.setEx(cacheKey, 600, JSON.stringify(Rooms));
         return res.status(201).json({ details: Rooms });
     }
 }
