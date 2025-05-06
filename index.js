@@ -32,6 +32,7 @@ class App extends Iointialize {
             origin: process.env.CLIENT_URL,
             methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             allowedHeaders: ["Content-Type", "Authorization"],
+            Access-Control-Allow-Origin: process.env.CLIENT_URL,
             credentials: true,
             optionSuccessStatus: 200,
         };
@@ -41,6 +42,7 @@ class App extends Iointialize {
             cors: {
                 origin: process.env.CLIENT_URL,
                 methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+                   Access-Control-Allow-Origin: process.env.CLIENT_URL,
                 credentials: true,
             },
             connectionStateRecovery: {},
