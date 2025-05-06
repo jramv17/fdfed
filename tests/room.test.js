@@ -4,6 +4,16 @@ const { getJwtCookie } = require('../utils/createTestJwt');
 const dbModel = require('../Models/RoomModel');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
+// const { createClient } = require('redis-mock');
+// const redisClient = createClient();
+// jest.mock('../config/redisClient', () => {
+//   const { createClient } = require('redis-mock');
+//   const mockRedisClient = createClient();
+
+//   return {
+//     redisClient: mockRedisClient,
+//   };
+// });
 
 let jwtCookie;
 let createdApartmentId;
@@ -17,21 +27,23 @@ beforeAll(async () => {
         useUnifiedTopology: true,
     });
     jwtCookie = await getJwtCookie();
+
+    // if (!redisClient.isOpen?.()) {
+    //     await redisClient.connect?.(); // Depending on redis-mock version
+    //   }
 });
 
 
-
-//clean the db before each test
-
-// beforeEach(async () => {
-//     await User.deleteMany({});
-// });
 
 
 afterAll(async () => {
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
     await mongoServer.stop();
+
+    // if (redisClient.quit) {
+    //     await redisClient.quit();
+    //   }
 });
 
 
