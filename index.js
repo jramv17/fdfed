@@ -24,6 +24,7 @@ const Payment = require("./Routes/PaymentRouter");
 const PostRouter = require("./Routes/PostRouter");
 const path = require("path");
 const { config } = require("dotenv");
+config();
 class App extends Iointialize {
     constructor() {
         config();
