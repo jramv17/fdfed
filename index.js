@@ -62,7 +62,7 @@ class App extends Iointialize {
     
         // ✅ 2. Other middlewares
         const morganFormat = ":method :url :status :response-time ms";
-        this.app.use('/api-docs', swaggerUi.serve,swaggerSpec);
+        this.app.use('/api-docs', swaggerUi.serve,swaggerUi.setup(swaggerSpec));
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(bodyParser.json());

@@ -235,4 +235,3 @@ class LogRouter extends LogController {
 }
 
 module.exports = new LogRouter().route;
-

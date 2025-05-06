@@ -140,4 +140,3 @@ class UserAuthRouter extends UserAuth {
 }
 
 module.exports = new UserAuthRouter().route;
-
