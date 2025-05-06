@@ -3,6 +3,7 @@ const app = require('../app.js');
 const mongoose = require('mongoose');
 const User = require('../Models/UserModel.js');
 const { MongoMemoryServer } = require('mongodb-memory-server');
+// const {redisClient} = require('../config/redisClient');
 
 //make a local instance of db
 beforeAll(async () => {
@@ -13,6 +14,9 @@ beforeAll(async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
+    // if (!redisClient.isOpen) {
+    //   await redisClient.connect();
+    // }
 });
 
 
@@ -28,6 +32,9 @@ afterAll(async () => {
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
     await mongoServer.stop();
+    // if (redisClient.isOpen) {
+    //   await redisClient.quit();
+    // }
 });
 
 
