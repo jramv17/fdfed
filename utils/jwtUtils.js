@@ -22,7 +22,7 @@ function issueJWT(user) {
 function getDecryptedToken(encryptedToken) {
     const bytes = CryptoJS.AES.decrypt(encryptedToken, AES_KEY);
     const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-    console.log()
+    console.log(sdfgsdfgsdf);
     return decryptedData;
 }
 

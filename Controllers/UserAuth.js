@@ -44,7 +44,7 @@ class UserAuthentication {
             const { token } = issueJWT(this.user);
 
             res.cookie('jwt', token, {
-                maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true, sameSite: 'strict'
+                maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true,sameSite: 'none'
             });
             res.status(200).send({ username: this.user.username, email: this.user.email, uuid: this.user.uuid });
         } catch (error) {
@@ -64,7 +64,7 @@ class UserAuthentication {
                 const { token } = issueJWT(req.user);
                 res.clearCookie('jwt');
                 res.cookie('jwt', token, {
-                    maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true, sameSite: 'strict'
+                    maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true, sameSite: 'none'
                 });
                 res.redirect(CLIENT_URL);
             } else {

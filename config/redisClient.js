@@ -15,7 +15,7 @@ redisClient.on('error', (err) => {
 });
 
 
-module.exports = redisClient;
+module.exports = {redisClient};
 
 
 

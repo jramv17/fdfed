@@ -16,8 +16,9 @@ const login = async (req, res, next) => {
                 return res.status(403).json({ message: 'You are already logged in using Google.' });
             }
             const { token } = issueJWT(user);
+            console.log(token);
             res.cookie('jwt', token, {
-                maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true, sameSite: 'strict'
+                maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true, sameSite: 'none'
             });
             req.userDetails = user;
             next();
@@ -27,7 +28,7 @@ const login = async (req, res, next) => {
 
 const jwt_authenticate = async (req, res, next) => {
     passport.authenticate('jwt', (error, user, info) => {
-        
+        console.log(error,user,info);
         if (error) {
             return res.status(500).json({ message: info.message });
         };

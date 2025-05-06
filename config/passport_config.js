@@ -12,10 +12,11 @@ const { generateHash } = require("../utils/passwordUtils");
 const env_variables = require("../utils/envutils.js");
 const { getDecryptedToken } = require("../utils/jwtUtils.js");
 var cookieExtractor = function (req) {
+    console.log("sdfkhbsdkf");
     var encryptedtoken = null;
     if (req && req.cookies && req.cookies['jwt']) {
-
         encryptedtoken = req.cookies['jwt'].token || req.cookies['jwt'];
+        console.log(encryptedtoken);
     }
     const token = encryptedtoken ? encryptedtoken : null;
     return token;
@@ -52,6 +53,7 @@ passport.use(new JwtStrategy(opts, async (token, done) => {
     if (!token) {
         return done(null, false, { message: "Token is not present" });
     }
+    console.log(token);
     return done(null, token.sub);
 }));
 const strategy = new LocalStrategy(customFields, VerifyUser);

@@ -9,7 +9,6 @@ class DbConfig {
     try {
       await mongoose.connect(this.mongoUri);
       console.log(`Connected to Mongodb Database`);
-      await redisClient.connect();
       console.log(`Connected to Redis`);
     } catch (error) {
       console.log(error);
