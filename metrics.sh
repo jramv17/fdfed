@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+
+
 # CONFIGURATION
 URL="http://localhost:5000/my-rooms"  # Replace with your actual endpoint
 COOKIE_FILE="cookie.txt"                   # File containing cookies in Netscape format
