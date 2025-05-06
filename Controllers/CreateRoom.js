@@ -2,28 +2,27 @@ const dbModel = require("../Models/RoomModel");
 const { v4: uuidv4 } = require('uuid');
 const userRoomdb = require("../Models/UserApartmentModel");
 const UserApartment = require("../Models/ApartmentUserModel");
-// const redisClient = require("../config/redisClient");
+const redisClient = require("../config/redisClient");
 class RoomModel {
     constructor() {
 
     }
     async registrationNumberCheck(req, res) {
         const { registration_num } = req.body;
-        // const cachedRegistrationNumber = await redisClient.get(`registration_num:${registration_num}`);
-        // if (cachedRegistrationNumber) {
-        //     return res.status(200).json({ message: "Registration number is available" });
-        // }
+       
         const isAlreadyRegistered = await dbModel.findOne({ registration_num: registration_num });
         if (isAlreadyRegistered) {
             return res.status(400).json({ message: "Registration number already in use" });
         } else {
-            // await redisClient.setEx(`regnum:${registration_num}`, 3600, "available");
             return res.status(200).json({ message: "Registration number is available" });
         }
 
     }
     async createRoomReq(req, res) {
         try {
+            // const cachedKey = `userRooms:${req.id}`;
+
+
             const { name, registration_num, state, address, flat_id, pincode, email, subscription, subscriptionStatus, subscriptionId } = req.body;
             const isAlreadyRegistered = await dbModel.findOne({ registration_num: registration_num });
             if (isAlreadyRegistered) {
@@ -56,13 +55,18 @@ class RoomModel {
             })
 
             await newRoom.save();
-            // await redisClient.del(`registration_num:${registration_num}`);
+
             const userRooms = await userRoomdb.find({ user: req.id });
             if (userRooms.length > 0) {
                 userRooms[0].apartments.push(newRoom._id);
                 await userRooms[0].save();
 
             }
+
+            //addded redis here
+            // await redisClient.del(cachedKey);
+
+
             return res.status(200).json({ message: "Room created successfully", room: newRoom });
 
         } catch (error) {

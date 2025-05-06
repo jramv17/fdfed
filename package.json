@@ -31,6 +31,7 @@
     "passport-local": "^1.0.0",
     "razorpay": "^2.9.5",
     "redis": "^5.0.1",
+    "redis-mock": "^0.56.3",
     "server": "file:",
     "socket.io": "^4.7.5",
     "supertest": "^7.1.0",
