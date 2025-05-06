@@ -30,6 +30,7 @@ class App extends Iointialize {
         config();
         super();
         console.log(process.env.CLIENT_URL);
+        console.log(process.env.CLIENT_URL);
         this.cors = {
             origin: process.env.CLIENT_URL,
             methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -53,11 +54,21 @@ class App extends Iointialize {
     }
 
     setMiddleware(corsOptions) {
+        // ✅ 1. CORS FIRST
         this.app.use(cors(corsOptions));
-        this.app.options("*", cors(corsOptions)); // Handle preflight
+        this.app.options("*", cors(corsOptions)); // Preflight handling
+    
+        // ✅ 2. Other middlewares
         const morganFormat = ":method :url :status :response-time ms";
+    
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(bodyParser.json());
+        this.app.use(express.json());
+        this.app.use(cookieParser());
+        this.app.use(passport.initialize());
+    
+        // ✅ 3. Logger
         this.app.use(
             morgan(morganFormat, {
                 stream: {
@@ -68,24 +79,22 @@ class App extends Iointialize {
                             status: message.split(" ")[2],
                             responseTime: message.split(" ")[3],
                         };
-                        // logger.default.info(JSON.stringify(logObject));
                         logger.info(JSON.stringify(logObject));
-
                     },
                 },
-            }),
+            })
         );
-        this.app.use(bodyParser.json());
-        this.app.use(express.json());
-        this.app.use(cookieParser());
-        this.app.use(passport.initialize());
-        this.app.options("*", cors(corsOptions));
+    
+        // ✅ 4. Static files
         this.app.use(
             "/communitypost",
-            express.static(path.join(__dirname, "communitypost")),
+            express.static(path.join(__dirname, "communitypost"))
         );
+    
+        // ✅ 5. Passport
         require("./config/passport_config");
     }
+    
 
     setRoutes() {
         this.app.use("/user", Auth);
