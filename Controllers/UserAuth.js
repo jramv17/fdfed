@@ -44,8 +44,8 @@ class UserAuthentication {
             const { token } = issueJWT(this.user);
 
             res.cookie('jwt', token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
+ 
+                secure: true,
                 maxAge: 1000 * 60 * 60 * 24
             });
             res.status(200).send({ username: this.user.username, email: this.user.email, uuid: this.user.uuid });
@@ -66,8 +66,7 @@ class UserAuthentication {
                 const { token } = issueJWT(req.user);
                 res.clearCookie('jwt');
                 res.cookie('jwt', token, {
-                    httpOnly: true,
-                    secure: process.env.NODE_ENV === 'production',
+                    secure: true,
                     maxAge: 1000 * 60 * 60 * 24
                 });
                 res.redirect(CLIENT_URL);
