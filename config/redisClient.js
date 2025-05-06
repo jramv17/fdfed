@@ -1,6 +1,14 @@
 const redis = require('redis');
+const env_variables = require('../utils/envutils');
+const redisClient = redis.createClient({
+  username: 'default',
+  password: env_variables.REDIS_PASSWORD,
+  socket: {
+      host: env_variables.REDIS_HOST,
+      port: env_variables.REDIS_PORT
+  }
+});
 
-const redisClient = redis.createClient(); // left it blank as of running in localhost as of now
 
 redisClient.on('error', (err) => {
   console.error('Redis error:', err);
@@ -8,3 +16,8 @@ redisClient.on('error', (err) => {
 
 
 module.exports = redisClient;
+
+
+
+
+

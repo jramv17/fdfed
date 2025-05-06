@@ -8,7 +8,10 @@ const env_variables = {
     JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
     MONGO_URI: process.env.MONGO_URI,
     RAZORPAY_KEY_ID: process.env.RAZORPAY_KEY_ID,
-    RAZORPAY_SECRET_KEY: process.env.RAZORPAY_SECRET_KEY
+    RAZORPAY_SECRET_KEY: process.env.RAZORPAY_SECRET_KEY,
+    REDIS_HOST: process.env.REDIS_HOST,
+    REDIS_PORT: process.env.REDIS_PORT,
+    REDIS_PASSWORD: process.env.REDIS_PASSWORD,
 
 
 }
