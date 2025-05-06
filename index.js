@@ -29,6 +29,7 @@ class App extends Iointialize {
     constructor() {
         config();
         super();
+        console.log(process.env.CLIENT_URL);
         this.cors = {
             origin: process.env.CLIENT_URL,
             methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -52,6 +53,8 @@ class App extends Iointialize {
     }
 
     setMiddleware(corsOptions) {
+        this.app.use(cors(corsOptions));
+        this.app.options("*", cors(corsOptions)); // Handle preflight
         const morganFormat = ":method :url :status :response-time ms";
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(express.urlencoded({ extended: true }));
