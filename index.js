@@ -24,7 +24,7 @@ const Payment = require("./Routes/PaymentRouter");
 const PostRouter = require("./Routes/PostRouter");
 const path = require("path");
 const { config } = require("dotenv");
-const { swaggerUi, swaggerSpec } = require('./swagger');
+const { swaggerUi, swaggerSpec } = require('./config/swagger');
     
 
 class App extends Iointialize {
