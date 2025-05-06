@@ -9,6 +9,7 @@ class PaymentController extends RazorpayPayment {
     async createSubscription(req, res) {
         try {
             const subscription = await this.createRazorpaySubscription(req.body);
+            console.log(subscription);
             res.status(200).json({ subscription });
         } catch (error) {
             console.error(error);

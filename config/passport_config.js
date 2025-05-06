@@ -74,7 +74,7 @@ passport.use(new GoogleStrategy({
             }
         } else {
             const uuid = uuidv4();
-            const hash = generateHash(profile.id);
+            const {hash} = generateHash(profile.id);
             const newUser = new User({
                 username: username,
                 email: email,

@@ -17,7 +17,7 @@ class RazorpayPayment {
 
 
             const plan_id = subdetails.sub_type === 'Basic' ? plans.basic.plan_id : plans.premium.plan_id;
-
+            console.log(plan_id);
             return this.razorpay_instance.subscriptions.create({
                 plan_id: plan_id,
                 customer_notify: 1,
@@ -28,6 +28,7 @@ class RazorpayPayment {
                     key2: "value2"
                 }
             });
+            
         } catch (error) {
             console.error(error);
             throw new Error('Failed to create subscription: ' + error.message);

@@ -30,8 +30,7 @@ class RoomController {
                 };
             })
         );
-        //caching for 10 minutes
-        // await redisClient.setEx(cacheKey, 600, JSON.stringify(Rooms));
+        await redisClient.setEx(cacheKey, 60, JSON.stringify(Rooms));
         return res.status(201).json({ details: Rooms });
     }
 }
