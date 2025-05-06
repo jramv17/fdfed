@@ -39,7 +39,7 @@ class App extends Iointialize {
         this.server = http.createServer(this.app);
         this.io = require("socket.io")(this.server, {
             cors: {
-                origin: "http://localhost:5173",
+                origin: process.env.CLIENT_URL,
                 methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
                 credentials: true,
             },

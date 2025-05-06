@@ -12,7 +12,9 @@ const env_variables = {
     REDIS_HOST: process.env.REDIS_HOST,
     REDIS_PORT: process.env.REDIS_PORT,
     REDIS_PASSWORD: process.env.REDIS_PASSWORD,
-
+    SERVER_URL: process.env.SERVER_URL,
+    CLIENT_URL: process.env.CLIENT_URL,
+    FALLBACK_URL: process.env.FALLBACK_URL,
 
 }
 
