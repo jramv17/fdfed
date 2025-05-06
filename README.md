@@ -1,4 +1,4 @@
-## Group Number: 10
+## Group Number : 10
 ## Project Name : SocietyLog
 ## Group Members:
 ### Jayaram V S20220010089
