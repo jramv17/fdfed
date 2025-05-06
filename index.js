@@ -79,7 +79,6 @@ class App extends Iointialize {
         this.app.use(express.json());
         this.app.use(cookieParser());
         this.app.use(passport.initialize());
-        this.app.use(cors(corsOptions));
         this.app.options("*", cors(corsOptions));
         this.app.use(
             "/communitypost",
