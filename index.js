@@ -24,7 +24,9 @@ const Payment = require("./Routes/PaymentRouter");
 const PostRouter = require("./Routes/PostRouter");
 const path = require("path");
 const { config } = require("dotenv");
-config();
+const { swaggerUi, swaggerSpec } = require('./swagger');
+    
+
 class App extends Iointialize {
     constructor() {
         config();
@@ -60,14 +62,14 @@ class App extends Iointialize {
     
         // ✅ 2. Other middlewares
         const morganFormat = ":method :url :status :response-time ms";
-    
+        this.app.use('/api-docs', swaggerUi.serve,swaggerSpec);
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(bodyParser.json());
         this.app.use(express.json());
         this.app.use(cookieParser());
         this.app.use(passport.initialize());
-    
+        
         // ✅ 3. Logger
         this.app.use(
             morgan(morganFormat, {
@@ -90,6 +92,8 @@ class App extends Iointialize {
             "/communitypost",
             express.static(path.join(__dirname, "communitypost"))
         );
+
+        
     
         // ✅ 5. Passport
         require("./config/passport_config");
