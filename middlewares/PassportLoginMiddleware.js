@@ -17,8 +17,7 @@ const login = async (req, res, next) => {
             }
             const { token } = issueJWT(user);
             res.cookie('jwt', token, {
-                secure: true,
-                maxAge: 1000 * 60 * 60 * 24
+                maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true, sameSite: 'strict'
             });
             req.userDetails = user;
             next();
