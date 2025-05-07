@@ -6,6 +6,7 @@ const ApartmentSchema = new mongoose.Schema(
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
+            index:true ,
             required: true,
         },
         ownername: String,

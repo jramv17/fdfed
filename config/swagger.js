@@ -1,23 +1,24 @@
-const swaggerJsdoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
+const express = require("express");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 
 const options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'SocietyLog API',
-      version: '1.0.0',
-      description: 'API documentation for SocietyLog',
+      title: "SocietyLog API",
+      version: "1.0.0",
+      description: "API documentation for SocietyLog",
     },
-    servers: [
+    serve: [
       {
-        url: 'https://fdfed-server.vercel.app',  
+        url: "https://fdfed-server.vercel.app",
       },
     ],
   },
-  apis: ['./Routes/*.js'],  
+  apis: ["./Routes/*.js"],
 };
 
 const swaggerSpec = swaggerJsdoc(options);
 
-module.exports = { swaggerUi, swaggerSpec };
+modules.exports ={ swaggerSpec , swaggerUi}

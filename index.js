@@ -24,8 +24,8 @@ const Payment = require("./Routes/PaymentRouter");
 const PostRouter = require("./Routes/PostRouter");
 const path = require("path");
 const { config } = require("dotenv");
-const { swaggerUi, swaggerSpec } = require('./config/swagger');
-    
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 
 class App extends Iointialize {
     constructor() {
@@ -86,12 +86,32 @@ class App extends Iointialize {
                 },
             })
         );
-    
+        const options = {
+            definition: {
+              openapi: "3.0.0",
+              info: {
+                title: "SocietyLog API",
+                version: "1.0.0",
+                description: "API documentation for SocietyLog",
+              },
+              servers: [
+                {
+                  url: "https://fdfed-server.vercel.app",
+                },
+              ],
+            },
+            apis: ["./Routes/*.js"],
+          };
+          
+        const swaggerSpec = swaggerJsdoc(options);
+          
+          // ✅ Plug this directly into your Express app
+        this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
         // ✅ 4. Static files
         this.app.use(
             "/communitypost",
             express.static(path.join(__dirname, "communitypost"))
-        );
+        )
 
         
     
